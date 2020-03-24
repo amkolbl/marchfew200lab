@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TippingService } from 'src/app/services/tipping.service';
 
 @Component({
   selector: 'app-tip-calculator',
@@ -11,12 +12,12 @@ export class TipCalculatorComponent implements OnInit {
   tipPercentage = .2;
   amountOfTip = 0;
   totalToBePaid = 0;
-  constructor() { }
+  constructor(private service: TippingService) { }
 
   ngOnInit(): void {
   }
+
   updateAmount(amount: number) {
-    console.log(amount);
     this.billAmount = amount;
     this.updateData();
   }
@@ -28,6 +29,9 @@ export class TipCalculatorComponent implements OnInit {
 
   updateData() {
     this.amountOfTip = this.billAmount * this.tipPercentage;
-    this.totalToBePaid = +this.amountOfTip + +this.billAmount;
+    this.totalToBePaid = +this.amountOfTip + this.billAmount;
+  }
+  saveMeal() {
+    this.service.addItem(Date.now(), this.billAmount, this.tipPercentage, this.amountOfTip, this.totalToBePaid);
   }
 }

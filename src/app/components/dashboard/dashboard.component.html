@@ -1,1 +1,23 @@
-<p>dashboard works!</p>
+<h1>Saved Meals:</h1>
+<p>You have {{ numberOfMeals }} saved meals</p>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Bill</th>
+      <th scope="col">Tip Percent</th>
+      <th scope="col">Tip Amount</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let item of listOfMeals">
+    <tr>
+      <td>{{ item.date | date }}</td>
+      <td>${{ item.billAmount }}</td>
+      <td>{{ item.tipPercent * 100 }}%</td>
+      <td>${{ item.tipAmount }}</td>
+      <td>${{ item.total }}</td>
+    </tr>
+  </tbody>
+</table>
